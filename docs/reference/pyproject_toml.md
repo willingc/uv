@@ -149,14 +149,23 @@ To prevent a private project from accidentally being uploaded to PyPI, add the
 
 ### `urls`
 
-Links to important pages of the project
+Links to important pages of the project. The following labels are known to be supported:
+
+- `changelog` (Changelog): The project's comprehensive changelog
+- `documentation` (Documentation): The project's online documentation
+- `download` (Download): A download URL for the current distribution
+- `funding` (Funding): Funding Information
+- `homepage` (Homepage): The project's home page
+- `issues` (Issue Tracker): The project's bug tracker
+- `releasenotes` (Release Notes): The project's curated release notes
+- `source` (Source Code): The project's hosted source code or repository
 
 ```toml
 [project.urls]
-Repository = "https://github.com/astral-sh/uv"
-Documentation = "https://docs.astral.sh/uv"
-Changelog = "https://github.com/astral-sh/uv/blob/main/CHANGELOG.md"
-Releases = "https://github.com/astral-sh/uv/releases"
+changelog = "https://github.com/astral-sh/uv/blob/main/CHANGELOG.md"
+documentation = "https://docs.astral.sh/uv"
+releases = "https://github.com/astral-sh/uv/releases"
+repository = "https://github.com/astral-sh/uv"
 ```
 
 ### `scripts`, `gui-scripts` and `entry-points`
