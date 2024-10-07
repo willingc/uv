@@ -679,20 +679,45 @@ pub fn satisfies_python_preference(
 ) -> bool {
     match preference {
         PythonPreference::OnlyManaged => {
-            matches!(source, PythonSource::Managed) || interpreter.is_managed()
+            // Perform a fast check using the source before querying the interpreter
+            if matches!(source, PythonSource::Managed) || interpreter.is_managed() {
+                true
+            } else {
+                debug!(
+                    "Ignoring Python interpreter at `{}`: only managed interpreters allowed",
+                    interpreter.sys_executable().display()
+                );
+                false
+            }
         }
         // If not "only" a kind, any interpreter is okay
         PythonPreference::Managed | PythonPreference::System => true,
         PythonPreference::OnlySystem => match source {
             // A managed interpreter is never a system interpreter
-            PythonSource::Managed => false,
+            PythonSource::Managed => {
+                debug!(
+                    "Ignoring Python interpreter at `{}`: only unmanaged interpreters allowed",
+                    interpreter.sys_executable().display()
+                );
+                false
+            }
             // We can't be sure if this is a system interpreter without checking
             PythonSource::ProvidedPath
             | PythonSource::ParentInterpreter
             | PythonSource::ActiveEnvironment
             | PythonSource::CondaPrefix
             | PythonSource::DiscoveredEnvironment
-            | PythonSource::SearchPath => !interpreter.is_managed(),
+            | PythonSource::SearchPath => {
+                if interpreter.is_managed() {
+                    debug!(
+                        "Ignoring Python interpreter at `{}`: only unmanaged interpreters allowed",
+                        interpreter.sys_executable().display()
+                    );
+                    false
+                } else {
+                    true
+                }
+            }
             // Managed interpreters should never be found in these sources
             PythonSource::Registry | PythonSource::MicrosoftStore => true,
         },
