@@ -71,7 +71,7 @@ build and install the project into the project environment. By default, projects
 [editable mode](https://setuptools.pypa.io/en/latest/userguide/development_mode.html) so changes to
 the source code are reflected immediately, without re-installation.
 
-You can define uv as build backend:
+To define uv as build backend:
 
 ```toml
 [build-system]
