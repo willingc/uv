@@ -230,7 +230,7 @@ mysql = ["pymysql>=1.1.1,<2"]
 foo = "foo.cli:__main__"
 
 [project.gui-scripts]
-foo-gui = "foo.gui"
+foo-gui = "foo.gui:main"
 
 [project.entry-points.bar_group]
 foo-bar = "foo:bar"
