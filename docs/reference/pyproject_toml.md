@@ -196,7 +196,7 @@ See [Dependencies](../concepts/dependencies.md).
 
 ### `dynamic`
 
-Dynamic metadata is not support. Please specify all metadata statically.
+Dynamic metadata is not supported. Please specify all metadata statically.
 
 ## Full example
 
