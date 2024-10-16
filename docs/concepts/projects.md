@@ -640,7 +640,7 @@ To use uv as build backend, add the following to `pyproject.toml`:
 
 ```toml
 [build-system]
-requires = ["uv>=0.4.18,<5"]
+requires = ["uv>=0.4.18,<0.5"]
 build-backend = "uv"
 ```
 
