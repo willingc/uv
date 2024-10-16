@@ -103,7 +103,7 @@ export UV_EXTRA_INDEX_URL="https://aws:${AWS_CODEARTIFACT_TOKEN}@${AWS_DOMAIN}-$
 ### Publishing packages
 
 If you also want to publish your own packages to AWS CodeArtifact, you can use `uv publish` as
-described in the [publishing guide](../build_and_publish). You will need to set `UV_PUBLISH_URL`
+described in the [publishing guide](../build_and_publish.md). You will need to set `UV_PUBLISH_URL`
 separately from the credentials:
 
 ```bash
