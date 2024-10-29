@@ -47,6 +47,7 @@ use crate::error::{NoSolutionError, ResolveError};
 use crate::fork_indexes::ForkIndexes;
 use crate::fork_urls::ForkUrls;
 use crate::manifest::Manifest;
+use crate::multi_version_mode::MultiVersionMode;
 use crate::pins::FilePins;
 use crate::preferences::Preferences;
 use crate::pubgrub::{
@@ -374,13 +375,15 @@ impl<InstalledPackages: InstalledPackagesProvider> ResolverState<InstalledPackag
 
                     // Walk over the selected versions, and mark them as preferences. We have to
                     // add forks back as to not override the preferences from the lockfile for
-                    // the next fork
-                    for (package, version) in &resolution.nodes {
-                        preferences.insert(
-                            package.name.clone(),
-                            resolution.markers.fork_markers().cloned(),
-                            version.clone(),
-                        );
+                    // the next fork.
+                    if matches!(self.options.multi_version_mode, MultiVersionMode::Fewest) {
+                        for (package, version) in &resolution.nodes {
+                            preferences.insert(
+                                package.name.clone(),
+                                resolution.markers.fork_markers().cloned(),
+                                version.clone(),
+                            );
+                        }
                     }
 
                     resolutions.push(resolution);

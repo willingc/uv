@@ -854,6 +854,38 @@ Windows.
 
 ---
 
+### [`multi-version`](#multi-version) {: #multi-version }
+
+The strategy to use when selecting multiple versions of a given package across Python
+versions and platforms.
+
+By default, uv will minimize the number of versions selected for each package (`fewest`),
+to minimize differences between environments. Under `latest`, uv will select the latest
+compatible version for each environment, even if it results in more versions being selected.
+
+**Default value**: `"fewest"`
+
+**Possible values**:
+
+- `"fewest"`: Resolve the highest compatible version of each package
+- `"latest"`: Resolve the lowest compatible version of each package
+
+**Example usage**:
+
+=== "pyproject.toml"
+
+    ```toml
+    [tool.uv]
+    resolution = "latest"
+    ```
+=== "uv.toml"
+
+    ```toml
+    resolution = "latest"
+    ```
+
+---
+
 ### [`native-tls`](#native-tls) {: #native-tls }
 
 Whether to load TLS certificates from the platform's native certificate store.
@@ -2145,6 +2177,40 @@ Windows.
     ```toml
     [pip]
     link-mode = "copy"
+    ```
+
+---
+
+#### [`multi-version`](#pip_multi-version) {: #pip_multi-version }
+<span id="multi-version"></span>
+
+The strategy to use when selecting multiple versions of a given package across Python
+versions and platforms.
+
+By default, uv will minimize the number of versions selected for each package (`fewest`),
+to minimize differences between environments. Under `latest`, uv will select the latest
+compatible version for each environment, even if it results in more versions being selected.
+
+**Default value**: `"fewest"`
+
+**Possible values**:
+
+- `"fewest"`: Resolve the highest compatible version of each package
+- `"latest"`: Resolve the lowest compatible version of each package
+
+**Example usage**:
+
+=== "pyproject.toml"
+
+    ```toml
+    [tool.uv.pip]
+    resolution = "latest"
+    ```
+=== "uv.toml"
+
+    ```toml
+    [pip]
+    resolution = "latest"
     ```
 
 ---
