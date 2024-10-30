@@ -861,7 +861,9 @@ versions and platforms.
 
 By default, uv will minimize the number of versions selected for each package (`fewest`),
 to minimize differences between environments. Under `latest`, uv will select the latest
-compatible version for each environment, even if it results in more versions being selected.
+compatible version for each environment and perform an independent solve for each Python
+minor version, ensuring that the latest-compatible version is used in each environment,
+even if it results in more versions being selected across the lockfile.
 
 **Default value**: `"fewest"`
 
@@ -876,12 +878,12 @@ compatible version for each environment, even if it results in more versions bei
 
     ```toml
     [tool.uv]
-    resolution = "latest"
+    multi-version = "latest"
     ```
 === "uv.toml"
 
     ```toml
-    resolution = "latest"
+    multi-version = "latest"
     ```
 
 ---
@@ -2189,7 +2191,9 @@ versions and platforms.
 
 By default, uv will minimize the number of versions selected for each package (`fewest`),
 to minimize differences between environments. Under `latest`, uv will select the latest
-compatible version for each environment, even if it results in more versions being selected.
+compatible version for each environment and perform an independent solve for each Python
+minor version, ensuring that the latest-compatible version is used in each environment,
+even if it results in more versions being selected across the lockfile.
 
 **Default value**: `"fewest"`
 
@@ -2204,13 +2208,13 @@ compatible version for each environment, even if it results in more versions bei
 
     ```toml
     [tool.uv.pip]
-    resolution = "latest"
+    multi-version = "latest"
     ```
 === "uv.toml"
 
     ```toml
     [pip]
-    resolution = "latest"
+    multi-version = "latest"
     ```
 
 ---

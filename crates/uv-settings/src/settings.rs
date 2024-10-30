@@ -464,12 +464,14 @@ pub struct ResolverInstallerOptions {
     ///
     /// By default, uv will minimize the number of versions selected for each package (`fewest`),
     /// to minimize differences between environments. Under `latest`, uv will select the latest
-    /// compatible version for each environment, even if it results in more versions being selected.
+    /// compatible version for each environment and perform an independent solve for each Python
+    /// minor version, ensuring that the latest-compatible version is used in each environment,
+    /// even if it results in more versions being selected across the lockfile.
     #[option(
         default = "\"fewest\"",
         value_type = "str",
         example = r#"
-            resolution = "latest"
+            multi-version = "latest"
         "#,
         possible_values = true
     )]
@@ -1013,12 +1015,14 @@ pub struct PipOptions {
     ///
     /// By default, uv will minimize the number of versions selected for each package (`fewest`),
     /// to minimize differences between environments. Under `latest`, uv will select the latest
-    /// compatible version for each environment, even if it results in more versions being selected.
+    /// compatible version for each environment and perform an independent solve for each Python
+    /// minor version, ensuring that the latest-compatible version is used in each environment,
+    /// even if it results in more versions being selected across the lockfile.
     #[option(
         default = "\"fewest\"",
         value_type = "str",
         example = r#"
-            resolution = "latest"
+            multi-version = "latest"
         "#,
         possible_values = true
     )]

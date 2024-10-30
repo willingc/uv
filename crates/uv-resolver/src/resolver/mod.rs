@@ -308,21 +308,35 @@ impl<InstalledPackages: InstalledPackagesProvider> ResolverState<InstalledPackag
             self.markers.clone(),
             self.python_requirement.clone(),
         );
+
         let mut preferences = self.preferences.clone();
-        let mut forked_states =
-            if let ResolverMarkers::Universal { fork_preferences } = &self.markers {
-                if fork_preferences.is_empty() {
-                    vec![state]
-                } else {
-                    fork_preferences
+        let mut forked_states = if let ResolverMarkers::Universal { fork_preferences } =
+            &self.markers
+        {
+            if fork_preferences.is_empty() {
+                match self.options.multi_version_mode {
+                    MultiVersionMode::Fewest => {
+                        vec![state]
+                    }
+                    MultiVersionMode::Latest => self
+                        .python_requirement
+                        .target()
+                        .forks()
                         .iter()
                         .rev()
                         .map(|fork_preference| state.clone().with_markers(fork_preference.clone()))
-                        .collect()
+                        .collect(),
                 }
             } else {
-                vec![state]
-            };
+                fork_preferences
+                    .iter()
+                    .rev()
+                    .map(|fork_preference| state.clone().with_markers(fork_preference.clone()))
+                    .collect()
+            }
+        } else {
+            vec![state]
+        };
         let mut resolutions = vec![];
 
         'FORK: while let Some(mut state) = forked_states.pop() {
