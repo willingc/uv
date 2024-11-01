@@ -621,6 +621,7 @@ pub(crate) struct PythonInstallSettings {
     pub(crate) targets: Vec<String>,
     pub(crate) reinstall: bool,
     pub(crate) force: bool,
+    pub(crate) default: bool,
 }
 
 impl PythonInstallSettings {
@@ -631,12 +632,14 @@ impl PythonInstallSettings {
             targets,
             reinstall,
             force,
+            default,
         } = args;
 
         Self {
             targets,
             reinstall,
             force,
+            default,
         }
     }
 }

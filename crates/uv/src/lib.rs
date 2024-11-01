@@ -1054,6 +1054,7 @@ async fn run(mut cli: Cli) -> Result<ExitStatus> {
                 args.targets,
                 args.reinstall,
                 args.force,
+                args.default,
                 globals.python_downloads,
                 globals.native_tls,
                 globals.connectivity,
