@@ -36,6 +36,19 @@ Alternatively, `uv build <SRC>` will build the package in the specified director
 
 ## Publishing your package
 
+!!! note
+
+    To avoid accidentally publishing a private package to PyPI, set this classifier that is
+    valid but gets rejected by PyPI:
+
+    ```toml
+    [project]
+    classifiers = ["Private :: Do Not Upload"]
+    ```
+
+    We also recommend only generating per-project tokens: Without a PyPI token matching the project,
+    it can't be accidentally published.
+
 Publish your package with `uv publish`:
 
 ```console
