@@ -195,7 +195,12 @@ fn check_keyring_behaviours() {
         .arg("https://test.pypi.org/simple/")
         .arg("--publish-url")
         .arg("https://test.pypi.org/legacy/?ok")
-        .arg("../../scripts/links/ok-1.0.0-py3-none-any.whl"), @r###"
+        .arg("../../scripts/links/ok-1.0.0-py3-none-any.whl")
+        // Avoid `gi.repository.GLib.GError`
+        .env(
+            "PYTHON_KEYRING_BACKEND",
+            "keyrings.alt.file.PlaintextKeyring",
+        ), @r###"
     success: false
     exit_code: 2
     ----- stdout -----
@@ -218,7 +223,12 @@ fn check_keyring_behaviours() {
         .arg("subprocess")
         .arg("--publish-url")
         .arg("https://test.pypi.org/legacy/?ok")
-        .arg("../../scripts/links/ok-1.0.0-py3-none-any.whl"), @r###"
+        .arg("../../scripts/links/ok-1.0.0-py3-none-any.whl")
+        // Avoid `gi.repository.GLib.GError`
+        .env(
+            "PYTHON_KEYRING_BACKEND",
+            "keyrings.alt.file.PlaintextKeyring",
+        ),  @r###"
     success: false
     exit_code: 2
     ----- stdout -----
@@ -244,7 +254,12 @@ fn check_keyring_behaviours() {
         .arg("https://test.pypi.org/simple/")
         .arg("--publish-url")
         .arg("https://test.pypi.org/legacy/?ok")
-        .arg("../../scripts/links/ok-1.0.0-py3-none-any.whl"), @r###"
+        .arg("../../scripts/links/ok-1.0.0-py3-none-any.whl")
+        // Avoid `gi.repository.GLib.GError`
+        .env(
+            "PYTHON_KEYRING_BACKEND",
+            "keyrings.alt.file.PlaintextKeyring",
+        ),  @r###"
     success: false
     exit_code: 2
     ----- stdout -----
